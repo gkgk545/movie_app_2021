@@ -1,59 +1,28 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const FoodList = [
-  {
-    id: 1,
-    name: "kimchi",
-    image:
-      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    name: "kimchi2",
-    image:
-      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
-    rating: 3.5,
-  },
-  {
-    id: 3,
-    name: "kimbab",
-    image:
-      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
-    rating: 5.0,
-  },
-];
+class App extends React.Component {
+  state = {
+    count: 0,
+  }; // Object
 
-function Food({ name, picture, rating }) {
-  return (
-    <div>
-      <h2>I love {name}</h2>
-      <img src={picture} alt={name} />
-      <h3>rating: {rating}/5.0</h3>
-    </div>
-  );
+  add = () => {
+    this.setState((current) => ({ count: current.count + 1 }));
+  };
+
+  minus = () => {
+    this.setState((current) => ({ count: current.count - 1 }));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>The number is {this.state.count}</h1>
+        <button onClick={this.add}>add</button>
+        <button onClick={this.minus}>minus</button>
+      </div>
+    );
+  }
 }
-
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-};
-
-function App() {
-  return (
-    <div>
-      {FoodList.map((dish) => (
-        <Food
-          key={dish.id}
-          name={dish.name}
-          picture={dish.image}
-          rating={dish.rating}
-        />
-      ))}
-    </div>
-  );
-}
+// setState 호출 => react는 class Component에 있는 새로운 state와 함께 render() 호출
 
 export default App;
